@@ -8,11 +8,14 @@ import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended"
 export default tseslint.config(
   {
     ignores: ["node_modules", "dist", "public"],
+  },
+  {
+    files: ["**/*.{js,mjs,cjs,ts,vue}"],
     rules: {
       "@typescript-eslint/no-explicit-any": ["off"],
+      "vue/multi-word-component-names": "off",
     },
   },
-  { files: ["**/*.{js,mjs,cjs,ts,vue}"] },
   //隐藏的全局变量定义问题
   { languageOptions: { globals: globals.browser } },
   //eslint现成规则集

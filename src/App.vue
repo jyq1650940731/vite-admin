@@ -5,6 +5,7 @@
     </a>
     <el-input-number v-model="num" :min="1" :max="10" @change="handleChange" />
     <el-input v-model="elForm.elV"></el-input>
+    <svg-icon name="zddw"></svg-icon>122222
     <el-button>默认按钮</el-button>
     <p>操你妈逼</p>
     <a href="https://vuejs.org/" target="_blank">

@@ -11,5 +11,6 @@ declare module 'vue' {
     ElInput: typeof import('element-plus/es')['ElInput']
     ElInputNumber: typeof import('element-plus/es')['ElInputNumber']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
+    SvgIcon: typeof import('./src/components/SvgIcon/index.vue')['default']
   }
 }

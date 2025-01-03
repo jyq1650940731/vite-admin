@@ -4,6 +4,7 @@ import vue from "@vitejs/plugin-vue";
 import AutoImport from "unplugin-auto-import/vite";
 import Components from "unplugin-vue-components/vite";
 import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
+import { createSvgIconsPlugin } from "vite-plugin-svg-icons";
 import ElementPlus from "unplugin-element-plus/vite";
 
 const ENV_DIR = path.join(__dirname, "env");
@@ -29,6 +30,10 @@ export default defineConfig(({ mode, command }: ConfigEnv) => {
       }),
       ElementPlus({
         useSource: true,
+      }),
+      createSvgIconsPlugin({
+        iconDirs: [path.resolve(process.cwd(), "src/assets/icons")], //图标存放路径
+        symbolId: "icon-[name]",
       }),
     ],
     resolve: {
