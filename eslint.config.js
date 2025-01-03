@@ -8,6 +8,9 @@ import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended"
 export default tseslint.config(
   {
     ignores: ["node_modules", "dist", "public"],
+    rules: {
+      "@typescript-eslint/no-explicit-any": ["off"],
+    },
   },
   { files: ["**/*.{js,mjs,cjs,ts,vue}"] },
   //隐藏的全局变量定义问题
