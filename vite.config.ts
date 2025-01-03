@@ -6,8 +6,8 @@ import Components from "unplugin-vue-components/vite";
 import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
 import { createSvgIconsPlugin } from "vite-plugin-svg-icons";
 import ElementPlus from "unplugin-element-plus/vite";
+import UnoCSS from "unocss/vite";
 
-const ENV_DIR = path.join(__dirname, "env");
 // https://vite.dev/config/
 export default defineConfig(({ mode, command }: ConfigEnv) => {
   console.log(mode, command);
@@ -22,6 +22,7 @@ export default defineConfig(({ mode, command }: ConfigEnv) => {
   return {
     plugins: [
       vue(),
+      UnoCSS(),
       AutoImport({
         imports: ["vue", "vue-router", "pinia"],
         dts: "src/types/auto-import.d.ts",
@@ -55,6 +56,6 @@ export default defineConfig(({ mode, command }: ConfigEnv) => {
       },
     },
 
-    envDir: ENV_DIR,
+    envDir: path.join(__dirname, "env"),
   };
 });

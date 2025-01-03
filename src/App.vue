@@ -7,7 +7,7 @@
     <el-input v-model="elForm.elV"></el-input>
     <svg-icon name="zddw"></svg-icon>
     <el-button>默认按钮</el-button>
-    <p>操你妈逼</p>
+    <p class="bg-slate-200">操你妈逼</p>
     <a href="https://vuejs.org/" target="_blank">
       <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
     </a>
