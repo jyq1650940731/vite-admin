@@ -5,7 +5,7 @@
     </a>
     <el-input-number v-model="num" :min="1" :max="10" @change="handleChange" />
     <el-input v-model="elForm.elV"></el-input>
-    <svg-icon name="zddw"></svg-icon>122222
+    <svg-icon name="zddw"></svg-icon>
     <el-button>默认按钮</el-button>
     <p>操你妈逼</p>
     <a href="https://vuejs.org/" target="_blank">
@@ -15,18 +15,16 @@
   <HelloWorld msg="Vite + Vue" />
 </template>
 <script setup lang="ts">
-import HelloWorld from "./components/HelloWorld.vue";
+import { reactive, ref } from "vue";
 // console.log(window.$message.success("成功！"));
 window.$message.success("成功！");
-import { reactive } from "vue";
 const elForm = reactive({
   elV: "",
 });
-import { ref } from "vue";
 
 const num = ref(1);
-const handleChange = (value: number) => {
-  console.log(value);
+const handleChange = () => {
+  console.log(num.value);
 };
 </script>
 <style lang="scss">
