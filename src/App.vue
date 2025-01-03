@@ -6,6 +6,7 @@
     <el-input-number v-model="num" :min="1" :max="10" @change="handleChange" />
     <el-input v-model="elForm.elV"></el-input>
     <el-button>默认按钮</el-button>
+    <p>操你妈逼</p>
     <a href="https://vuejs.org/" target="_blank">
       <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
     </a>
@@ -27,7 +28,10 @@ const handleChange = (value: number) => {
   console.log(value);
 };
 </script>
-<style scoped>
+<style lang="scss">
+p {
+  color: var(--primary-color);
+}
 .logo {
   height: 6em;
   padding: 1.5em;

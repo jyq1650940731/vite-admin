@@ -4,6 +4,8 @@ import vue from "@vitejs/plugin-vue";
 import AutoImport from "unplugin-auto-import/vite";
 import Components from "unplugin-vue-components/vite";
 import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
+import ElementPlus from "unplugin-element-plus/vite";
+
 const ENV_DIR = path.join(__dirname, "env");
 // https://vite.dev/config/
 export default defineConfig(({ mode, command }: ConfigEnv) => {
@@ -25,7 +27,23 @@ export default defineConfig(({ mode, command }: ConfigEnv) => {
       Components({
         resolvers: [ElementPlusResolver()],
       }),
+      ElementPlus({
+        useSource: true,
+      }),
     ],
+    resolve: {
+      alias: {
+        "@": path.resolve(__dirname, "./src"),
+      },
+    },
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: `@use "@/styles/define.scss" as *;@use "@/styles/element/index.scss" as *;`,
+        },
+      },
+    },
+
     envDir: ENV_DIR,
   };
 });
