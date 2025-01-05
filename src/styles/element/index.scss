@@ -1,7 +1,12 @@
-@forward "element-plus/theme-chalk/src/common/var.scss" with (
-  $colors: (
-    "primary": (
-      //   "base": $--primary-color,
-    ),
-  )
-);
+/* el-divider间隔线 */
+.el-divider--horizontal {
+  margin: 8px 0 calc(var(--base-margin) + 8px) 0;
+
+  .el-divider__text {
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+  }
+}

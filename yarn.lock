@@ -18,6 +18,14 @@
     package-manager-detector "^0.2.0"
     tinyexec "^0.3.0"
 
+"@antfu/install-pkg@^0.5.0":
+  version "0.5.0"
+  resolved "https://registry.npmmirror.com/@antfu/install-pkg/-/install-pkg-0.5.0.tgz#37357c16a962266c0a8811ee29b3ea1354d952d9"
+  integrity sha512-dKnk2xlAyC7rvTkpkHmu+Qy/2Zc3Vm/l8PtNyIOGDBtXPY3kThfU4ORNEp3V7SXw5XSOb+tOJaUYpfquPzL/Tg==
+  dependencies:
+    package-manager-detector "^0.2.5"
+    tinyexec "^0.3.1"
+
 "@antfu/utils@^0.7.10", "@antfu/utils@^0.7.7":
   version "0.7.10"
   resolved "https://registry.npmmirror.com/@antfu/utils/-/utils-0.7.10.tgz#ae829f170158e297a9b6a28f161a8e487d00814d"
@@ -666,7 +674,7 @@
   resolved "https://registry.npmmirror.com/@iconify/types/-/types-2.0.0.tgz#ab0e9ea681d6c8a1214f30cd741fe3a20cc57f57"
   integrity sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==
 
-"@iconify/utils@^2.1.22":
+"@iconify/utils@^2.1.22", "@iconify/utils@^2.2.0":
   version "2.2.1"
   resolved "https://registry.npmmirror.com/@iconify/utils/-/utils-2.2.1.tgz#635b9bd8fd3e5e53742471bc0b5291f1570dda41"
   integrity sha512-0/7J7hk4PqXmxo5PDBDxmnecw5PxklZJfNjIVG9FM0mEfVrvfudS22rYWsqVk6gR3UJ/mSYS90X4R3znXnqfNA==
@@ -3954,7 +3962,7 @@ p-locate@^6.0.0:
   dependencies:
     p-limit "^4.0.0"
 
-package-manager-detector@^0.2.0:
+package-manager-detector@^0.2.0, package-manager-detector@^0.2.5:
   version "0.2.8"
   resolved "https://registry.npmmirror.com/package-manager-detector/-/package-manager-detector-0.2.8.tgz#f5ace2dbd37666af54e5acec11bc37c8450f72d0"
   integrity sha512-ts9KSdroZisdvKMWVAVCXiKqnqNfXz4+IbrBG8/BWx/TR5le+jfenvoBuIZ6UWM9nz47W7AbD9qYfAwfWMIwzA==
@@ -4907,7 +4915,7 @@ text-extensions@^2.0.0:
   resolved "https://registry.npmmirror.com/through/-/through-2.3.8.tgz#0dd4c9ffaabc357960b1b724115d7e0e86a2e1f5"
   integrity sha512-w89qg7PI8wAdvX60bMDP+bFoD5Dvhm9oLheFp5O4a2QF0cSBGsBX4qZmadPMvVqlLJBBci+WqGGOAPvcDeNSVg==
 
-tinyexec@^0.3.0:
+tinyexec@^0.3.0, tinyexec@^0.3.1:
   version "0.3.2"
   resolved "https://registry.npmmirror.com/tinyexec/-/tinyexec-0.3.2.tgz#941794e657a85e496577995c6eef66f53f42b3d2"
   integrity sha512-KQQR9yN7R5+OSwaK0XQoj22pwHoTlgYqmUscPYoknOoWCWfj/5/ABTMRi69FrKU5ffPVh5QcFikpWJI/P1ocHA==
@@ -5169,6 +5177,19 @@ unplugin-element-plus@^0.9.0:
     "@rollup/pluginutils" "^5.1.4"
     es-module-lexer "^1.6.0"
     magic-string "^0.30.17"
+    unplugin "^2.1.0"
+
+unplugin-icons@^0.22.0:
+  version "0.22.0"
+  resolved "https://registry.npmmirror.com/unplugin-icons/-/unplugin-icons-0.22.0.tgz#84f690602a22bf6cdcae94556e3a2dc8ad5c5a29"
+  integrity sha512-CP+iZq5U7doOifer5bcM0jQ9t3Is7EGybIYt3myVxceI8Zuk8EZEpe1NPtJvh7iqMs1VdbK0L41t9+um9VuuLw==
+  dependencies:
+    "@antfu/install-pkg" "^0.5.0"
+    "@antfu/utils" "^0.7.10"
+    "@iconify/utils" "^2.2.0"
+    debug "^4.4.0"
+    kolorist "^1.8.0"
+    local-pkg "^0.5.1"
     unplugin "^2.1.0"
 
 unplugin-vue-components@^0.28.0:

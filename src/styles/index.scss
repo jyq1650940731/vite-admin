@@ -1,0 +1,9 @@
+@use "./variables.module.scss" as *;
+@use "./vel.scss";
+@use "./element/index.scss";
+html {
+  #app {
+    height: 100vh;
+    overflow: auto;
+  }
+}

@@ -3,6 +3,8 @@ import { defineConfig, ConfigEnv, loadEnv } from "vite";
 import vue from "@vitejs/plugin-vue";
 import AutoImport from "unplugin-auto-import/vite";
 import Components from "unplugin-vue-components/vite";
+import Icons from "unplugin-icons/vite";
+import IconsResolver from "unplugin-icons/resolver";
 import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
 import { createSvgIconsPlugin } from "vite-plugin-svg-icons";
 import ElementPlus from "unplugin-element-plus/vite";
@@ -26,7 +28,12 @@ export default defineConfig(({ mode, command }: ConfigEnv) => {
       AutoImport({
         imports: ["vue", "vue-router", "pinia"],
         dts: path.resolve(__dirname, "src/types/auto-import.d.ts"),
-        resolvers: [ElementPlusResolver()],
+        resolvers: [
+          ElementPlusResolver(),
+          IconsResolver({
+            prefix: "Icon",
+          }),
+        ],
         eslintrc: {
           enabled: true, // 1、改为true用于生成eslint配置。2、生成后改回false，避免重复生成消耗
           filepath: path.resolve(__dirname, ".eslintrc-auto-import.json"),
@@ -34,8 +41,16 @@ export default defineConfig(({ mode, command }: ConfigEnv) => {
         },
       }),
       Components({
-        resolvers: [ElementPlusResolver()],
+        resolvers: [
+          ElementPlusResolver(), // 自动注册图标组件
+          IconsResolver({
+            enabledCollections: ["ep"],
+          }),
+        ],
         dts: path.resolve(__dirname, "src/types/components.d.ts"),
+      }),
+      Icons({
+        autoInstall: true,
       }),
       ElementPlus({
         useSource: true,
@@ -48,12 +63,13 @@ export default defineConfig(({ mode, command }: ConfigEnv) => {
     resolve: {
       alias: {
         "@": path.resolve(__dirname, "./src"),
+        "@layout": path.resolve(__dirname, "./src/layouts"),
       },
     },
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: `@use "@/styles/define.scss" as *;@use "@/styles/element/index.scss" as *;`,
+          // additionalData: `@use "@/styles/element/index.scss" as *;`,
         },
       },
     },
