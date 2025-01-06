@@ -7,7 +7,7 @@ import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended"
 /** @type {import('eslint').Linter.Config[]} */
 export default tseslint.config(
   {
-    ignores: ["node_modules", "dist", "public"],
+    ignores: ["node_modules", "dist", "public", "./src/config/index.js"],
   },
   {
     files: ["**/*.{js,mjs,cjs,ts,vue}"],

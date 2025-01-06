@@ -6,8 +6,8 @@
     }"
   >
     <vel-logo></vel-logo>
-    <el-tabs v-model="activeName" tab-position="left">
-      <template v-for="(item, index) in tab" :key="index + item.name">
+    <el-tabs v-model="tab.data" tab-position="left" @tab-click="handleTabClick">
+      <template v-for="(item, index) in routes" :key="index + item.name">
         <el-tab-pane :name="item.name">
           <template #label>
             <div class="vab-column-grid vab-column-grid-card" :title="item.meta.title">
@@ -26,11 +26,11 @@
     </el-tabs>
     <el-menu
       :background-color="variables['column-second-menu-background']"
-      :default-active="'1'"
+      :default-active="activeMenu.data"
       mode="vertical"
       :unique-opened="false"
     >
-      <el-divider> 测试demo </el-divider>
+      <el-divider> {{ tabMenu ? tabMenu.meta.title : "" }} </el-divider>
       <template v-for="item in partialRoutes" :key="item.path">
         <vel-menu v-if="!item.meta.hidden" :item="item" />
       </template>
@@ -38,348 +38,32 @@
   </el-scrollbar>
 </template>
 <script lang="ts" setup>
-import { ref, reactive } from "vue";
-import type { MenuItemType } from "@/types/dataTypes/router.ts";
 import VelLogo from "@/layouts/components/VelLogo/index.vue";
 import VelMenu from "@/layouts/components/VelMenu/index.vue";
 import variables from "@/styles/variables.module.scss";
+import { ref } from "vue";
+import { useRouterStore } from "@/stores/modules/routes";
+// import { useRouter } from "vue-router";
 defineOptions({ name: "ValColumnBar" });
+
+const routesStore = useRouterStore();
 const collapse = ref(false);
-const activeName = ref("测试");
-const partialRoutes = reactive<MenuItemType[]>([
-  {
-    path: "icon",
-    name: "Icon",
-    meta: {
-      title: "图标",
-      icon: "remixicon-line",
-    },
-    children: [
-      {
-        path: "remixIcon",
-        name: "RemixIcon",
-        component: "@views/vab/icon/remixIcon",
-        meta: {
-          title: "小清新图标",
-        },
-      },
-      {
-        path: "iconSelector",
-        name: "IconSelector",
-        component: "@views/vab/icon/iconSelector",
-        meta: {
-          title: "图标选择器",
-        },
-      },
-    ],
-  },
-  {
-    path: "permission",
-    name: "Permission",
-    component: "@views/vab/permission/index",
-    meta: {
-      title: "角色权限",
-      icon: "user-3-line",
-      badge: "Pro",
-    },
-  },
-  {
-    path: "table",
-    name: "Table",
-    meta: {
-      title: "表格",
-      guard: {
-        role: ["Editor"],
-        mode: "except",
-      },
-      icon: "table-2",
-    },
-    children: [
-      {
-        path: "comprehensiveTable",
-        name: "ComprehensiveTable",
-        component: "@views/vab/table/comprehensiveTable",
-        meta: {
-          title: "综合表格",
-        },
-      },
-      {
-        path: "detail",
-        name: "Detail",
-        component: "@views/vab/table/detail",
-        meta: {
-          hidden: true,
-          title: "详情页",
-          activeMenu: "/vab/table/comprehensiveTable",
-          dynamicNewTab: true,
-        },
-      },
-      {
-        path: "inlineEditTable",
-        name: "InlineEditTable",
-        component: "@views/vab/table/inlineEditTable",
-        meta: {
-          title: "行内编辑表格",
-          noKeepAlive: true,
-        },
-      },
-      {
-        path: "customTable",
-        name: "CustomTable",
-        component: "@views/vab/table/customTable",
-        meta: {
-          title: "自定义表格",
-        },
-      },
-      {
-        path: "dynamicTable",
-        name: "DynamicTable",
-        component: "@views/vab/table/dynamicTable",
-        meta: {
-          title: "动态表格",
-          badge: "New",
-        },
-      },
-    ],
-  },
-  {
-    path: "card",
-    name: "Card",
-    component: "@views/vab/card/index",
-    meta: {
-      title: "卡片",
-      guard: ["Admin"],
-      icon: "inbox-line",
-    },
-  },
-  {
-    path: "list",
-    name: "List",
-    component: "@views/vab/list/index",
-    meta: {
-      title: "列表",
-      guard: ["Admin"],
-      icon: "list-check-2",
-    },
-  },
-  {
-    path: "description",
-    name: "Description",
-    component: "@views/vab/description/index",
-    meta: {
-      title: "描述",
-      guard: ["Admin"],
-      icon: "slideshow-line",
-    },
-  },
-  {
-    path: "calendar",
-    name: "Calendar",
-    component: "@views/vab/calendar/index",
-    meta: {
-      title: "日历",
-      guard: ["Admin"],
-      icon: "calendar-check-line",
-      dot: true,
-    },
-  },
-  {
-    path: "editor",
-    name: "Editor",
-    meta: {
-      title: "编辑器",
-      guard: ["Admin"],
-      icon: "edit-2-line",
-    },
-    children: [
-      {
-        path: "richTextEditor",
-        name: "RichTextEditor",
-        component: "@views/vab/editor/richTextEditor",
-        meta: {
-          title: "富文本编辑器",
-          guard: ["Admin"],
-        },
-      },
-      {
-        path: "wangEditor",
-        name: "WangEditor",
-        component: "@views/vab/editor/wangEditor",
-        meta: {
-          title: "腾讯文档",
-          guard: ["Admin"],
-          dot: true,
-        },
-      },
-    ],
-  },
-  {
-    path: "form",
-    name: "Form",
-    meta: {
-      title: "表单",
-      guard: ["Admin"],
-      icon: "file-list-2-line",
-    },
-    children: [
-      {
-        path: "comprehensiveForm",
-        name: "ComprehensiveForm",
-        component: "@views/vab/form/comprehensiveForm",
-        meta: {
-          title: "综合表单",
-        },
-      },
-      {
-        path: "stepForm",
-        name: "StepForm",
-        component: "@views/vab/form/stepForm",
-        meta: {
-          title: "分步表单",
-        },
-      },
-      {
-        path: "button",
-        name: "Button",
-        component: "@views/vab/form/button",
-        meta: {
-          title: "按钮",
-        },
-      },
-      {
-        path: "link",
-        name: "Link",
-        component: "@views/vab/form/link",
-        meta: {
-          title: "文字链接",
-        },
-      },
-      {
-        path: "radio",
-        name: "Radio",
-        component: "@views/vab/form/radio",
-        meta: {
-          title: "单选框",
-        },
-      },
-      {
-        path: "checkbox",
-        name: "Checkbox",
-        component: "@views/vab/form/checkbox",
-        meta: {
-          title: "多选框",
-        },
-      },
-      {
-        path: "input",
-        name: "Input",
-        component: "@views/vab/form/input",
-        meta: {
-          title: "输入框",
-        },
-      },
-      {
-        path: "inputNumber",
-        name: "InputNumber",
-        component: "@views/vab/form/inputNumber",
-        meta: {
-          title: "计数器",
-        },
-      },
-      {
-        path: "select",
-        name: "Select",
-        component: "@views/vab/form/select",
-        meta: {
-          title: "选择器",
-          dot: true,
-        },
-      },
-      {
-        path: "switch",
-        name: "Switch",
-        component: "@views/vab/form/switch",
-        meta: {
-          title: "开关",
-        },
-      },
-      {
-        path: "slider",
-        name: "Slider",
-        component: "@views/vab/form/slider",
-        meta: {
-          title: "滑块",
-        },
-      },
-      {
-        path: "timePicker",
-        name: "TimePicker",
-        component: "@views/vab/form/timePicker",
-        meta: {
-          title: "时间选择器",
-        },
-      },
-      {
-        path: "datePicker",
-        name: "DatePicker",
-        component: "@views/vab/form/datePicker",
-        meta: {
-          title: "日期选择器",
-        },
-      },
-      {
-        path: "dateTimePicker",
-        name: "DateTimePicker",
-        component: "@views/vab/form/dateTimePicker",
-        meta: {
-          title: "日期时间选择器",
-        },
-      },
-      {
-        path: "rate",
-        name: "Rate",
-        component: "@views/vab/form/rate",
-        meta: {
-          title: "评分",
-        },
-      },
-    ],
-  },
-]);
-const tab = reactive([
-  {
-    path: "index",
-    name: "Index",
-    component: "@views/index/index",
-    meta: {
-      title: "首页",
-      icon: "home-2-line",
-      noClosable: true,
-      hidden: false,
-    },
-  },
-  {
-    path: "dashboard",
-    name: "Dashboard",
-    component: "@views/index/dashboard",
-    meta: {
-      title: "看板",
-      icon: "dashboard-line",
-      hidden: false,
-    },
-  },
-  {
-    path: "workbench",
-    name: "Workbench",
-    component: "@views/index/workbench",
-    meta: {
-      title: "工作台",
-      icon: "settings-6-line",
-      dot: true,
-      hidden: false,
-    },
-  },
-]);
+
+// const route = useRoute();
+// const router = useRouter();
+
+const {
+  getTab: tab,
+  getTabMenu: tabMenu,
+  getActiveMenu: activeMenu,
+  getRoutes: routes,
+  getPartialRoutes: partialRoutes,
+} = routesStore;
+
+const handleTabClick = () => {
+  console.log(tabMenu);
+  // router.push(tabMenu.redirect || tabMenu);
+};
 </script>
 <style lang="scss" scoped>
 @mixin active {

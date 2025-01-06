@@ -3,7 +3,7 @@
     <vel-column-bar></vel-column-bar>
     <main class="vel-main">
       <header class="vel-layout-header"></header>
-      <div></div>
+      <vel-app-main></vel-app-main>
     </main>
   </div>
 </template>
