@@ -7,3 +7,4 @@ declare const $message: SFCInstallWithContext<Message>;
 declare module "mockjs";
 declare module "nprogress";
 declare module "qs";
+declare module "path-browserify";

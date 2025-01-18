@@ -1,9 +1,10 @@
 <script lang="ts" setup>
 import { useRouterStore } from "@/stores/modules/routes";
 import { handleActivePath } from "@/utils/routes";
-import { watch } from "vue";
-import { useRoute } from "vue-router";
+import { watch, onMounted } from "vue";
+import { useRoute, useRouter } from "vue-router";
 const route = useRoute();
+const router = useRouter();
 const { tab, activeMenu } = useRouterStore();
 defineOptions({ name: "VelAppMain" });
 watch(
@@ -14,10 +15,16 @@ watch(
   },
   { immediate: true },
 );
+onMounted(() => {
+  console.log({ route });
+  console.log({ router: router.getRoutes() });
+});
 </script>
 
 <template>
   <div class="vel-app-main">
-    <section><router-view></router-view></section>
+    <section>
+      <router-view></router-view>
+    </section>
   </div>
 </template>

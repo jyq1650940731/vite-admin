@@ -29,6 +29,7 @@
       :default-active="activeMenu.data"
       mode="vertical"
       :unique-opened="false"
+      :route="true"
     >
       <el-divider> {{ tabMenu ? tabMenu.meta.title : "" }} </el-divider>
       <template v-for="item in partialRoutes" :key="item.path">
@@ -43,14 +44,15 @@ import VelMenu from "@/layouts/components/VelMenu/index.vue";
 import variables from "@/styles/variables.module.scss";
 import { ref } from "vue";
 import { useRouterStore } from "@/stores/modules/routes";
-// import { useRouter } from "vue-router";
+import { storeToRefs } from "pinia";
+import { useRouter } from "vue-router";
 defineOptions({ name: "ValColumnBar" });
 
 const routesStore = useRouterStore();
 const collapse = ref(false);
 
 // const route = useRoute();
-// const router = useRouter();
+const router = useRouter();
 
 const {
   getTab: tab,
@@ -58,11 +60,12 @@ const {
   getActiveMenu: activeMenu,
   getRoutes: routes,
   getPartialRoutes: partialRoutes,
-} = routesStore;
+} = storeToRefs(routesStore);
 
 const handleTabClick = () => {
-  console.log(tabMenu);
-  // router.push(tabMenu.redirect || tabMenu);
+  setTimeout(() => {
+    if (tabMenu.value) router.push((tabMenu.value?.redirect || tabMenu.value) as string);
+  });
 };
 </script>
 <style lang="scss" scoped>
@@ -84,6 +87,7 @@ const handleTabClick = () => {
 }
 .vel-column-bar-container {
   position: fixed;
+  z-index: 999999;
   top: 0;
   bottom: 0;
   left: 0;

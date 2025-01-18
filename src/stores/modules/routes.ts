@@ -47,7 +47,7 @@ export const useRouterStore = defineStore("router", () => {
       routes = convertRouter(list);
     }
     //过滤路由
-    const accessRoutes = filterRoutes([...constantRoutes, ...routes]);
+    const accessRoutes = filterRoutes([...constantRoutes, ...routes], true);
     // 设置菜单所需路由
     state.routes = JSON.parse(JSON.stringify(accessRoutes));
     console.log(state.routes);

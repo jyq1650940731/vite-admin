@@ -15,5 +15,35 @@ defineOptions({ name: "ValLayout" });
       padding-top: calc(var(--base-nav-height) + var(--base-tabs-height));
     }
   }
+  :deep() {
+    .fixed-header {
+      position: fixed;
+      top: 0;
+      right: 0;
+      z-index: calc(var(--base-z-index) - 1);
+      width: 100%;
+    }
+
+    .vel-main {
+      position: relative;
+      width: auto;
+      min-height: 100%;
+      margin-left: var(--el-left-menu-width);
+
+      &.is-collapse-main {
+        margin-left: var(--base-left-menu-width-min);
+
+        .fixed-header {
+          width: var(--base-right-content-width-min);
+        }
+      }
+
+      &:not(.is-collapse-main) {
+        .fixed-header {
+          width: calc(100% - var(--el-left-menu-width));
+        }
+      }
+    }
+  }
 }
 </style>

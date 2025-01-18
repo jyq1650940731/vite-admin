@@ -13,7 +13,7 @@ const menu = [
       {
         path: "index",
         name: "Index",
-        component: "@/views/home/index",
+        component: "views/home/index",
         meta: {
           title: "首页",
           icon: "home-2-line",
@@ -23,7 +23,7 @@ const menu = [
       {
         path: "dashboard",
         name: "Dashboard",
-        component: "@/views/home/dashboard",
+        component: "views/home/dashboard",
         meta: {
           title: "看板",
           icon: "dashboard-line",
@@ -32,11 +32,55 @@ const menu = [
       {
         path: "workbench",
         name: "Workbench",
-        component: "@/views/home/workbench",
+        component: "views/home/workbench",
         meta: {
           title: "工作台",
           icon: "settings-6-line",
           dot: true,
+        },
+      },
+    ],
+  },
+  {
+    path: "/scenario",
+    name: "scenario",
+    component: "Layout",
+    meta: {
+      title: "场景题",
+      icon: "home-2-line",
+      breadcrumbHidden: true,
+    },
+    children: [
+      {
+        path: "/virtualList",
+        name: "virtualList",
+        component: "views/scenario/virtualList/index",
+        meta: {
+          title: "虚拟列表",
+          icon: "home-2-line",
+          noClosable: true,
+        },
+      },
+    ],
+  },
+  {
+    path: "/log",
+    name: "log",
+    component: "Layout",
+    meta: {
+      title: "日志",
+      icon: "home-2-line",
+      breadcrumbHidden: true,
+    },
+    children: [
+      {
+        path: "/errorLog",
+        name: "errorLog",
+        component: "views/log/errorLog/index",
+        meta: {
+          title: "错误日志",
+          icon: "home-2-line",
+          noClosable: true,
         },
       },
     ],
@@ -54,7 +98,7 @@ const menu = [
       {
         path: "403",
         name: "Error403",
-        component: "@/views/403",
+        component: "views/403",
         meta: {
           title: "403",
           icon: "error-warning-line",
@@ -63,7 +107,7 @@ const menu = [
       {
         path: "404",
         name: "Error404",
-        component: "@/views/404",
+        component: "views/404",
         meta: {
           title: "404",
           icon: "error-warning-line",

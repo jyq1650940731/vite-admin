@@ -1,6 +1,8 @@
 import qs from "qs";
+import { resolve } from "path-browserify";
 import type { VelRoute, VelRouteRecord } from "@/types/dataTypes/router";
 import type { RouteLocationNormalizedLoadedGeneric } from "vue-router";
+import { isExternal } from "./validate";
 const modules = import.meta.glob("@/views/**/*.vue");
 /**
  * @description all模式渲染后端返回路由,支持包含views路径的所有页面
@@ -12,7 +14,7 @@ export function convertRouter(asyncRoutes: VelRouteRecord[]) {
     if (route.component && route.component + "" === "Layout") {
       route.component = () => import("@/layouts/index.vue");
     } else {
-      route.component = modules[`/src/${route.component}/index.vue`];
+      route.component = modules[`/src/${route.component}.vue`];
     }
 
     if (route.children && route.children.length) {
@@ -23,11 +25,29 @@ export function convertRouter(asyncRoutes: VelRouteRecord[]) {
 }
 
 /**
- * @description 拦截路由
+ * @description 根据roles数组拦截路由
  * @param routes 路由
+ * @param rolesControl 是否进行权限控制
+ * @param baseUrl 基础路由
+ * @returns {[]}
  */
-export function filterRoutes(routes: VelRouteRecord[]) {
-  return routes;
+export function filterRoutes(routes: VelRouteRecord[], rolesControl: boolean, baseUrl = "/"): VelRouteRecord[] {
+  return routes
+    .flatMap((route: VelRouteRecord) =>
+      baseUrl !== "/" && route.children && route.meta.levelHidden ? [...route.children] : route,
+    )
+    .map((route: VelRouteRecord) => {
+      route = { ...route };
+      route.path = route.path !== "*" && !isExternal(route.path) ? resolve(baseUrl, route.path) : route.path;
+      if (route.children && route.children.length > 0) {
+        route.children = filterRoutes(route.children, rolesControl, route.path);
+        if (route.children.length > 0) {
+          route.childrenPathList = route.children.flatMap((_) => <string[]>_.childrenPathList);
+          if (!route.redirect) route.redirect = route.children[0].redirect || route.children[0].path;
+        }
+      } else route.childrenPathList = [route.path];
+      return route;
+    });
 }
 
 /**
@@ -41,6 +61,7 @@ export function handleActivePath(route: VelRoute | RouteLocationNormalizedLoaded
   const rawPath = route.matched ? route.matched[route.matched.length - 1].path : path;
   const fullPath =
     route.query && Object.keys(route.query).length ? `${route.path}?${qs.stringify(route.query)}` : route.path;
+
   if (isTab) return meta.dynamicNewTab ? fullPath : rawPath;
   if (meta.activeMenu) return meta.activeMenu;
   return fullPath;

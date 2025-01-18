@@ -1,5 +1,5 @@
 <template>
-  <el-menu-item :index="itemOrMenu.path">
+  <el-menu-item :index="itemOrMenu.path" @click="handleLink">
     <el-icon><component :is="'Edit'"></component></el-icon>
     <span :title="itemOrMenu.meta.title">
       {{ itemOrMenu.meta.title }}
@@ -13,10 +13,11 @@
   </el-menu-item>
 </template>
 <script lang="ts" setup>
+import { useRouter } from "vue-router";
 defineOptions({
   name: "VelMenuItem",
 });
-defineProps({
+const props = defineProps({
   itemOrMenu: {
     type: Object,
     default() {
@@ -24,6 +25,10 @@ defineProps({
     },
   },
 });
+const router = useRouter();
+const handleLink = () => {
+  router.push(props.itemOrMenu.path);
+};
 </script>
 <style lang="scss" scoped>
 :deep(.el-tag) {

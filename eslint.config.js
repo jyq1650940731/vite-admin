@@ -14,6 +14,7 @@ export default tseslint.config(
     rules: {
       "@typescript-eslint/no-explicit-any": ["off"],
       "vue/multi-word-component-names": "off",
+      "no-unused-expressions": 0,
     },
   },
   //隐藏的全局变量定义问题
