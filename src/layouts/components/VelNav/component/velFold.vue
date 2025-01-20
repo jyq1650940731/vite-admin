@@ -8,7 +8,6 @@ defineOptions({
   name: "VelFold",
 });
 import { useSettingsStore } from "@/stores/modules/settings";
-import { storeToRefs } from "pinia";
 const settingsStore = useSettingsStore();
 const { collapse } = storeToRefs(settingsStore);
 const { toggleCollapse } = settingsStore;

@@ -66,3 +66,16 @@ export function handleActivePath(route: VelRoute | RouteLocationNormalizedLoaded
   if (meta.activeMenu) return meta.activeMenu;
   return fullPath;
 }
+
+/**
+ * 根据path路径获取matched
+ * @param routes 菜单routes
+ * @param path 路径
+ * @returns {*} matched
+ */
+export function handleMatched(routers: VelRouteRecord[], path: string): VelRouteRecord[] {
+  console.log({ routers, path });
+  return routers
+    .filter((route: VelRouteRecord) => (route.childrenPathList || []).indexOf(path) + 1)
+    .flatMap((route: VelRouteRecord) => (route.children ? [route, ...handleMatched(route.children, path)] : [route]));
+}

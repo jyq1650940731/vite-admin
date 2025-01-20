@@ -13,7 +13,6 @@
   </el-menu-item>
 </template>
 <script lang="ts" setup>
-import { useRouter } from "vue-router";
 defineOptions({
   name: "VelMenuItem",
 });

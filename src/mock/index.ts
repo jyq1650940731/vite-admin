@@ -48,7 +48,6 @@ const menu = [
     meta: {
       title: "场景题",
       icon: "home-2-line",
-      breadcrumbHidden: true,
     },
     children: [
       {
@@ -70,7 +69,6 @@ const menu = [
     meta: {
       title: "日志",
       icon: "home-2-line",
-      breadcrumbHidden: true,
     },
     children: [
       {

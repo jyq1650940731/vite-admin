@@ -4,6 +4,7 @@
       <el-col :lg="12" :md="12" :sm="12" :xl="12" :xs="4">
         <div class="left-panel">
           <vel-fold></vel-fold>
+          <vel-breadcrumb></vel-breadcrumb>
         </div>
       </el-col>
     </el-row>
@@ -11,6 +12,7 @@
 </template>
 <script lang="ts" setup>
 import velFold from "./component/velFold.vue";
+import VelBreadcrumb from "../VelBreadcrumb/index.vue";
 defineOptions({
   name: "VelNav",
 });
