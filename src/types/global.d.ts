@@ -8,3 +8,4 @@ declare module "mockjs";
 declare module "nprogress";
 declare module "qs";
 declare module "path-browserify";
+declare module "vel-monitor";

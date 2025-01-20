@@ -14,6 +14,7 @@
     "strict": true,
     "jsx": "preserve",
     "importHelpers": true,
+    "noImplicitAny": false,
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "downlevelIteration": true,
@@ -26,6 +27,9 @@
     "sourceMap": true,
     "baseUrl": ".",
     "outDir": "./dist",
-    "types": ["element-plus/global", "node"]
+    "types": [
+      "element-plus/global",
+      "node"
+    ],
   }
 }

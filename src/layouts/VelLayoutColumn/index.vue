@@ -1,7 +1,12 @@
 <template>
   <div class="vel-layout-column" :class="{ fixed: fixedHeader }">
     <vel-column-bar></vel-column-bar>
-    <div class="vel-main">
+    <div
+      class="vel-main"
+      :class="{
+        'is-collapse-main': collapse,
+      }"
+    >
       <header
         class="vel-layout-header"
         :class="{
@@ -23,6 +28,12 @@ defineOptions({
   name: "VelLayoutColumn",
 });
 defineProps({
+  collapse: {
+    type: Boolean,
+    default() {
+      return false;
+    },
+  },
   fixedHeader: {
     type: Boolean,
     default() {
@@ -31,3 +42,20 @@ defineProps({
   },
 });
 </script>
+<style lang="scss" scoped>
+.vel-layout-column {
+  .vel-main {
+    &.is-collapse-main {
+      &.vab-main-horizontal {
+        margin-left: calc(var(--base-left-menu-width-min) * 1.3);
+
+        :deep() {
+          .fixed-header {
+            width: calc(100% - var(--base-left-menu-width-min) * 1.3);
+          }
+        }
+      }
+    }
+  }
+}
+</style>

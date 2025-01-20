@@ -10,3 +10,10 @@ export interface RouterStateType {
   };
   routes: VelRouteRecord[];
 }
+
+export interface settingsType {
+  collapse: boolean;
+  theme: {
+    layout: string;
+  };
+}

@@ -1,9 +1,13 @@
 <template>
-  <div class="vite-admin-wrapper"><vel-layout-column></vel-layout-column></div>
+  <div class="vite-admin-wrapper"><vel-layout-column :collapse="collapse"></vel-layout-column></div>
 </template>
 <script lang="ts" setup>
 import VelLayoutColumn from "./VelLayoutColumn/index.vue";
 defineOptions({ name: "ValLayout" });
+import { useSettingsStore } from "@/stores/modules/settings";
+import { storeToRefs } from "pinia";
+const settingsStore = useSettingsStore();
+const { collapse } = storeToRefs(settingsStore);
 </script>
 <style lang="scss" scoped>
 .vite-admin-wrapper {

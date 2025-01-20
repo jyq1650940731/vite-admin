@@ -42,16 +42,18 @@
 import VelLogo from "@/layouts/components/VelLogo/index.vue";
 import VelMenu from "@/layouts/components/VelMenu/index.vue";
 import variables from "@/styles/variables.module.scss";
-import { ref } from "vue";
+import { watchEffect } from "vue";
 import { useRouterStore } from "@/stores/modules/routes";
 import { storeToRefs } from "pinia";
 import { useRouter } from "vue-router";
+import { useSettingsStore } from "@/stores/modules/settings";
+
 defineOptions({ name: "ValColumnBar" });
 
+const settingsStore = useSettingsStore();
+const { collapse } = storeToRefs(settingsStore);
+const { foldSideBar } = settingsStore;
 const routesStore = useRouterStore();
-const collapse = ref(false);
-
-// const route = useRoute();
 const router = useRouter();
 
 const {
@@ -63,6 +65,7 @@ const {
 } = storeToRefs(routesStore);
 
 const handleTabClick = () => {
+  if (collapse) foldSideBar();
   setTimeout(() => {
     if (tabMenu.value) router.push((tabMenu.value?.redirect || tabMenu.value) as string);
   });
